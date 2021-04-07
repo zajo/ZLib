@@ -364,7 +364,7 @@ public:
     };
 
     void
-    testInflate(IDecompressor& d)
+    testInflate(IDecompressor&)
     {
         {
             Matrix m;
