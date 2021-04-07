@@ -34,6 +34,9 @@ def main(ctx):
   addon_gcc_10 = { "apt": { "packages": [ "g++-10"  ] } }
 
   return [
+    windows_cxx("msvc-14.0", "", image="cppalliance/dronevs2015", buildtype="boost", environment={"B2_TOOLSET": "msvc-14.0", "B2_CXXSTD": "11,14"}),
+    windows_cxx("msvc-14.1", "", image="cppalliance/dronevs2017", buildtype="boost", environment={"B2_TOOLSET": "msvc-14.1", "B2_CXXSTD": "11,14,17"}),
+    windows_cxx("msvc-14.2", "", image="cppalliance/dronevs2019", buildtype="boost", environment={"B2_TOOLSET": "msvc-14.2", "B2_CXXSTD": "17,latest"}),
     linux_cxx("Clang 3.8", "clang++-3.8", packages=" ".join(addon_clang_38["apt"]["packages"]), llvm_os="trusty", llvm_ver="3.8", image="ubuntu:14.04", buildtype="boost", environment={"B2_TOOLSET": "clang-3.8", "B2_CXXSTD": "11"}),
     linux_cxx("Clang 4.0", "clang++-4.0", packages=" ".join(addon_clang_4["apt"]["packages"]), llvm_os="xenial", llvm_ver="4.0", buildtype="boost", environment={"B2_TOOLSET": "clang-4.0", "B2_CXXSTD": "11,14"}),
     linux_cxx("Clang 5.0", "clang++-5.0", packages=" ".join(addon_clang_5["apt"]["packages"]), llvm_os="bionic", llvm_ver="5.0", buildtype="boost", environment={"B2_TOOLSET": "clang-5.0", "B2_CXXSTD": "11,14"}),
@@ -52,15 +55,10 @@ def main(ctx):
     linux_cxx("gcc 9", "g++-9", packages=" ".join(addon_gcc_9["apt"]["packages"]), image="ubuntu:18.04", buildtype="boost", environment={"B2_TOOLSET": "gcc-9", "B2_CXXSTD": "17,2a"}),
     linux_cxx("gcc 10", "g++-10", packages=" ".join(addon_gcc_10["apt"]["packages"]), image="ubuntu:18.04", buildtype="boost", environment={"B2_TOOLSET": "gcc-10", "B2_CXXSTD": "17,2a"}),
     linux_cxx("coverity", "", packages="", image="ubuntu:18.04", buildtype="coverity", environment={}),
-    # linux_cxx("docs", "", packages="docbook docbook-xml docbook-xsl xsltproc libsaxonhe-java default-jre-headless flex libfl-dev bison unzip rsync", image="cppalliance/droneubuntu1604:1", buildtype="docs", environment={"COMMENT": "docs"}),
     linux_cxx("codecov", "", packages=" ".join(addon_gcc_8["apt"]["packages"]), image="ubuntu:18.04", buildtype="codecov", environment={"COMMENT": "codecov.io","LCOV_BRANCH_COVERAGE": 0,"B2_CXXSTD": 11,"B2_TOOLSET": "gcc-8", "B2_DEFINES": "BOOST_NO_STRESS_TEST=1"}, stepenvironment={"CODECOV_TOKEN": {"from_secret": "codecov_token"} }),
     linux_cxx("valgrind", "", packages=" ".join(addon_clang_6["apt"]["packages"]) + " autotools-dev automake", image="ubuntu:18.04", buildtype="valgrind", environment={"COMMENT": "valgrind","B2_TOOLSET": "clang-6.0", "B2_CXXSTD": "11,14", "B2_DEFINES": "BOOST_NO_STRESS_TEST=1", "B2_VARIANT": "debug", "B2_TESTFLAGS": "testing.launcher=valgrind","VALGRIND_OPTS": "--error-exitcode=1" }),
     linux_cxx("asan", "clang++-11", packages=" ".join(addon_clang_11["apt"]["packages"]), image="ubuntu:18.04", llvm_os="bionic", llvm_ver="11", buildtype="boost", environment={"COMMENT": "asan", "B2_VARIANT": "debug", "B2_TOOLSET": "clang-11", "B2_CXXSTD":"17", "B2_ASAN": "1", "B2_DEFINES": "BOOST_NO_STRESS_TEST=1"}, privileged=True),
     linux_cxx("ubsan", "clang++-11", packages=" ".join(addon_clang_11["apt"]["packages"]), llvm_os="bionic", llvm_ver="11", buildtype="boost", environment={"COMMENT": "asan", "B2_VARIANT": "debug", "B2_TOOLSET": "clang-11", "B2_CXXSTD":"17", "B2_UBSAN": "1", "B2_DEFINES": "BOOST_NO_STRESS_TEST=1" }),
-    # linux_cxx("Intel", "", packages="g++-7 cmake build-essential pkg-config", buildtype="intel", environment={"COMMENT": "Intel oneAPI Toolkit", "B2_TOOLSET": "intel-linux", "B2_CXXSTD": "11,14,17", "B2_FLAGS": "warnings=on warnings-as-errors=off" }),
-    windows_cxx("msvc-14.0", "", image="cppalliance/dronevs2015", buildtype="boost", environment={"B2_TOOLSET": "msvc-14.0", "B2_CXXSTD": "11,14"}),
-    windows_cxx("msvc-14.1", "", image="cppalliance/dronevs2017", buildtype="boost", environment={"B2_TOOLSET": "msvc-14.1", "B2_CXXSTD": "11,14,17"}),
-    windows_cxx("msvc-14.2", "", image="cppalliance/dronevs2019", buildtype="boost", environment={"B2_TOOLSET": "msvc-14.2", "B2_CXXSTD": "17,latest"}),
     ]
 
 # Generate pipeline for Linux platform compilers.
