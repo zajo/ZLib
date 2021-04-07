@@ -76,8 +76,8 @@ def linux_cxx(name, cxx, cxxflags="", packages="", llvm_os="", llvm_ver="", arch
       # - B2_ADDRESS_MODEL=64,32
       # - B2_LINK=shared,static
       # - B2_THREADING=threading=multi,single
-      "B2_VARIANT" : "release",
-      "B2_FLAGS" : "warnings=extra warnings-as-errors=on"
+      "B2_VARIANT" : "debug,release",
+      "B2_FLAGS" : "warnings=extra"
     }
   environment_current=environment_global
   environment_current.update(environment)
@@ -128,8 +128,8 @@ def windows_cxx(name, cxx="", cxxflags="", packages="", llvm_os="", llvm_ver="",
       # - B2_ADDRESS_MODEL=64,32
       # - B2_LINK=shared,static
       # - B2_THREADING=threading=multi,single
-      "B2_VARIANT" : "release",
-      "B2_FLAGS" : "warnings=extra warnings-as-errors=on"
+      "B2_VARIANT" : "debug,release",
+      "B2_FLAGS" : "warnings=extra"
     }
   environment_current=environment_global
   environment_current.update(environment)
