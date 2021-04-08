@@ -136,7 +136,7 @@ def windows_cxx(name, cxx="", cxxflags="", packages="", llvm_os="", llvm_ver="",
     "name": "Windows %s" % name,
     "kind": "pipeline",
     "type": "docker",
-    "trigger": { "branch": [ "master","develop", "drone", "bugfix/*", "feature/*", "fix/*", "pr/*" ] },
+    "trigger": { "branch": [ "master","develop", "drone*", "bugfix/*", "feature/*", "fix/*", "pr/*" ] },
     "platform": {
       "os": "windows",
       "arch": arch
