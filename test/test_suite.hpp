@@ -30,6 +30,12 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <debugapi.h>
+#ifdef min
+#undef min
+#endif
+#ifdef max
+#undef max
+#endif
 #endif
 
 //  This is a derivative work
