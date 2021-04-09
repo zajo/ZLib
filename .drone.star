@@ -72,8 +72,8 @@ def linux_cxx(name, cxx, cxxflags="", packages="", llvm_os="", llvm_ver="", arch
       "B2_CI_VERSION": 1,
       # see: http://www.boost.org/build/doc/html/bbv2/overview/invocation.html#bbv2.overview.invocation.properties
       # - B2_ADDRESS_MODEL=64,32
-      # - B2_LINK=shared,static
       # - B2_THREADING=threading=multi,single
+      "B2_LINK" : "shared,static",
       "B2_VARIANT" : "debug,release",
       "B2_FLAGS" : "warnings=extra"
     }
@@ -124,8 +124,8 @@ def windows_cxx(name, cxx="", cxxflags="", packages="", llvm_os="", llvm_ver="",
       "B2_CI_VERSION": 1,
       # see: http://www.boost.org/build/doc/html/bbv2/overview/invocation.html#bbv2.overview.invocation.properties
       # - B2_ADDRESS_MODEL=64,32
-      # - B2_LINK=shared,static
       # - B2_THREADING=threading=multi,single
+      "B2_LINK" : "shared,static",
       "B2_VARIANT" : "debug,release",
       "B2_FLAGS" : "warnings=extra"
     }
