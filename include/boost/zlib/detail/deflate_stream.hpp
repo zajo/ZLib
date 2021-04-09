@@ -55,7 +55,7 @@ namespace boost {
 namespace zlib {
 namespace detail {
 
-class deflate_stream
+class BOOST_ZLIB_CLASS_DECL deflate_stream
 {
 protected:
     // Upper limit on code length
@@ -717,9 +717,5 @@ bi_reverse(Unsigned code, unsigned len)
 } // detail
 } // zlib
 } // boost
-
-#ifdef BOOST_ZLIB_HEADER_ONLY
-#include <boost/zlib/detail/impl/deflate_stream.ipp>
-#endif
 
 #endif

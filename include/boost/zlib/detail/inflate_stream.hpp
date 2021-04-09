@@ -56,7 +56,7 @@ namespace boost {
 namespace zlib {
 namespace detail {
 
-class inflate_stream
+class BOOST_ZLIB_CLASS_DECL inflate_stream
 {
 protected:
     inflate_stream()
@@ -241,9 +241,5 @@ private:
 } // detail
 } // zlib
 } // boost
-
-#ifdef BOOST_ZLIB_HEADER_ONLY
-#include <boost/zlib/detail/impl/inflate_stream.ipp>
-#endif
 
 #endif
