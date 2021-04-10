@@ -64,15 +64,12 @@ protected:
         w_.reset(15);
     }
 
-    BOOST_ZLIB_DECL
     void
     doClear();
 
-    BOOST_ZLIB_DECL
     void
     doReset(int windowBits);
 
-    BOOST_ZLIB_DECL
     void
     doWrite(z_params& zs, Flush flush, error_code& ec);
 
@@ -178,7 +175,6 @@ private:
         dists
     };
 
-    BOOST_ZLIB_DECL
     static
     void
     inflate_table(
@@ -190,16 +186,13 @@ private:
         std::uint16_t* work,
         error_code& ec);
 
-    BOOST_ZLIB_DECL
     static
     codes const&
     get_fixed_tables();
 
-    BOOST_ZLIB_DECL
     void
     fixedTables();
 
-    BOOST_ZLIB_DECL
     void
     inflate_fast(ranges& r, error_code& ec);
 
