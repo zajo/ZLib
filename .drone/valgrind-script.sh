@@ -20,5 +20,6 @@ export BOOST_CI_SRC_FOLDER=$(pwd)
 echo '==================================> COMPILE'
 
 cd $BOOST_ROOT/libs/$SELF
+export VALGRIND_OPTS=--gen-suppressions=all
 ci/travis/valgrind.sh
 echo "Job completed"
