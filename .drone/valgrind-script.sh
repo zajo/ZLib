@@ -20,8 +20,6 @@ export BOOST_CI_SRC_FOLDER=$(pwd)
 echo '==================================> COMPILE'
 
 cd $BOOST_ROOT/libs/$SELF
-export VALGRIND_OPTS=--gen-suppressions=all\ --log-file=./valgrind_sup.log
+export VALGRIND_OPTS=--suppressions=$BOOST_ROOT/libs/$SELF/test/valgrind.supp
 ci/travis/valgrind.sh
 echo "Job completed"
-cat ./valgrind_sup.log
-echo "End of valgrind_sup.log"
