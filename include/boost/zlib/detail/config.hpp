@@ -49,7 +49,6 @@
 #define BOOST_ZLIB_DEPRECATION_STRING \
     "This is a deprecated interface, #define BOOST_ZLIB_ALLOW_DEPRECATED to allow it"
 
-#ifndef BOOST_ZLIB_STANDALONE
 # if defined(BOOST_ZLIB_DOCS)
 #  define BOOST_ZLIB_DECL
 # else
@@ -74,10 +73,6 @@
 #   include <boost/config/auto_link.hpp>
 #  endif
 # endif
-#else
-// For standalone, shared library builds, users must manually
-// define the macros BOOST_ZLIB_DECL and BOOST_ZLIB_CLASS_DECL
-#endif
 
 
 #ifndef BOOST_ZLIB_DECL
