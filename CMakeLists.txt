@@ -27,6 +27,9 @@ set(BOOST_ZLIB_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/src.cpp
 )
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../..)
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost PREFIX "" FILES ${BOOST_ZLIB_HEADERS})

@@ -7,11 +7,44 @@
 # Official repository: https://github.com/CPPAlliance/ZLib
 #
 
-file(GLOB_RECURSE BOOST_ZLIB_TESTS_FILES CONFIGURE_DEPENDS Jamfile *.cpp *.hpp)
-list(FILTER BOOST_ZLIB_TESTS_FILES EXCLUDE REGEX "^${CMAKE_CURRENT_SOURCE_DIR}/cmake_install_test/.*$")
+source_group (include/boost/zlib zlib)
+source_group (test/extern/zlib-1.2.11 zlib)
+source_group (test "/")
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "" FILES ${BOOST_ZLIB_TESTS_FILES})
-add_executable(tests ${BOOST_ZLIB_TESTS_FILES})
-target_include_directories(tests PRIVATE .)
-target_link_libraries(tests PRIVATE Boost::zlib)
-add_test(NAME zlib-tests COMMAND tests)
+set (ZLIB_SOURCES
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/crc32.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/deflate.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inffast.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inffixed.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inflate.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inftrees.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/trees.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/zlib.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/zutil.h
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/adler32.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/compress.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/crc32.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/deflate.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/infback.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inffast.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inflate.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/inftrees.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/trees.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/uncompr.c
+    ${CMAKE_CURRENT_LIST_DIR}/extern/zlib-1.2.11/zutil.c
+)
+
+if (MSVC)
+    set_source_files_properties (${ZLIB_SOURCES} PROPERTIES COMPILE_FLAGS "/wd4127 /wd4131 /wd4244")
+endif()
+
+add_executable (tests-zlib
+    ${BOOST_ZLIB_SOURCES}
+    ${ZLIB_SOURCES}
+    Jamfile
+    error.cpp
+    deflate_stream.cpp
+    inflate_stream.cpp
+    zlib.cpp
+	main.cpp
+)
